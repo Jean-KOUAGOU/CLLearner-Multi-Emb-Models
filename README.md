@@ -8,6 +8,8 @@ The repository contains our implementation of a concept length learner in descri
 
 *-* Choose the knowledge you want in main.py by choosing the right path in the argument parser. Not that the family\_forte knowledge graph is a small/toy data set, and should not be used here. Please feel free to add another big knowledge graph to run new experiments. It may be necessary to reduce path\_length and num\_generation_paths in the DataTriples arguments, especially on big knowledge graphs.;
 
+*-* One can also choose the embeddings he/she wants, by default, ConEx embeddings will be used;
+
 *-* If GPU is available, set train_on_gpu to True;
 
 *-* In the train-test split line, choose test_size = 0.05;
