@@ -42,8 +42,8 @@ class DataTriples:
                 for tple in rel.get_relations():
                     train_file.write(str(tple[0])+"\t\t"+str(rel)+"\t\t"+str(tple[1])[:50]+"\n")
                     non_isolated_individuals.update([str(tple[0]), str(tple[1])])
-                for indiv in non_isolated_individuals:
-                    non_isolated_file.write(str(indiv)+"\n")
+            for indiv in non_isolated_individuals:
+                non_isolated_file.write(str(indiv)+"\n")
             train_file.close(); non_isolated_file.close()
         else:
             non_isolated_individuals = open(os.path.join("./"+self.path[:self.__base_path(self.path)], export_folder_name)+"/"+"non_isolated.txt", "r")

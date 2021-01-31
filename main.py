@@ -1,6 +1,6 @@
 import random, os, copy, torch, torch.nn as nn, numpy as np
 from Modified_ConEx.main import Experiment
-from Modified_ConEx.save_embeddings import save_ConEx_emb
+from Modified_ConEx.save_embeddings import save_emb
 # os.chdir('/content/drive/My Drive/ResearchProjectAMMI/ConEx/')
 # from main import Experiment
 from Modified_ConEx.helper_classes import Data
@@ -31,22 +31,26 @@ if not path.split("/")[-1].split(".")[0] in ["carcinogenesis", "mutagenesis", "N
 	if torch.cuda.is_available():
 	    torch.cuda.manual_seed_all(seed)
 	d = Data(data_dir=data_dir, reverse=False, no_valid_and_test=True)
-	experiment = Experiment(model='Conex', num_iterations=1000, batch_size=2000,
+	experiment = Experiment(model='Distmult', num_iterations=1000, batch_size=2000,
 		                embedding_dim=20,
 		                learning_rate=0.005, decay_rate=1., conv_out=16,
 		                projection_size=272,
 		                input_dropout=0.0, hidden_dropout=0.1,
 		                feature_map_dropout=0.1, label_smoothing=0, cuda=True)
 	experiment.train_and_eval(d, d.info, show_every=100)
-	save_ConEx_emb(d, experiment, data_dir)
+	save_emb(d, experiment, data_dir)
 
-Embeddings = pd.read_csv("./"+("/").join(data_dir.split("/")[1:-2])+"/"+"ConEx_emb.csv")
+Embeddings = pd.read_csv("./"+("/").join(data_dir.split("/")[1:-2])+"/"+"Distmult_emb.csv")
 Embeddings.set_index("Unnamed: 0", inplace=True)
 data = pd.read_csv("./"+("/").join(data_dir.split("/")[1:-2])+"/"+"data.csv")
 
 if path.split("/")[-1].split(".")[0] == 'carcinogenesis':
         data = data[data['concept length']!=5]
-print("Data size: ", data.shape[0])
+print("\n\n")        
+print("Prediction of concept lengths on {} knowledge graph".format(path.split("/")[-1].split(".")[0]))
+print("*"*60)
+print()
+print("Total data set size: ", data.shape[0])
 d_train, d_test = train_test_split(data, stratify=data['concept length'], test_size=0.2)
 
 alpha = 1.

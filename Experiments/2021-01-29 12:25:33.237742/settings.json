@@ -1,0 +1,1 @@
+{"embedding_dim": 20, "learning_rate": 0.005, "batch_size": 2000, "conv_out": 16, "input_dropout": 0.0, "hidden_dropout": 0.1, "projection_size": 272, "feature_map_dropout": 0.1, "label_smoothing": 0, "decay_rate": 1.0, "num_entities": 86, "num_relations": 3, "dataset": "./KGs/forte_family/Triples/", "dataset_augmentation": false}
